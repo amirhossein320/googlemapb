@@ -45,5 +45,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng Mahabad = new LatLng(36.7659726, 45.6948437);
         mMap.addMarker(new MarkerOptions().position(Mahabad).title("Mahabad").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Mahabad, 11));
+
+        //makan ek restoran
+        LatLng speedar = new LatLng(36.7687816,45.7217992);
+
+        //yek class az  modir makan ha misazim
+        MarkerOptions markerOptions = new MarkerOptions();
+
+        //ba  metode  zir makan ro  ezafe mikonim
+        markerOptions.position(speedar);
+
+        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+
+        // in  metod ham makan restoran ro  neshon mide
+        mMap.addMarker(markerOptions);
+
+
     }
 }
