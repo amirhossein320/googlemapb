@@ -2,6 +2,7 @@ package com.example.bayanae.googlemapsb;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
 
 import java.io.IOException;
 
@@ -36,6 +38,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marker6;
     private Marker marker7;
 
+    private float maxZoom = 18.9f;
+    private float minZoom = 13.3f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +58,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //تغییر حالت نقشه
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-           //افزودن دکمه های زووم به صفحه
+        //افزودن دکمه های زووم به صفحه
         mMap.getUiSettings().setZoomControlsEnabled(true);
         // کمینه زووم
-        mMap.setMinZoomPreference(13.3f);
+        mMap.setMinZoomPreference(minZoom);
         //بیشینه زووم
-        mMap.setMaxZoomPreference(18.9f);
+        mMap.setMaxZoomPreference(maxZoom);
 
 
         // Add a marker in Mahabad and move the camera
@@ -80,8 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         // افزودن عنوان
         markerOptions.title("رستوران سپیدار");
-        // افزودن توضیحات
-        markerOptions.snippet("رستوران سپیدار");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions.position(speedar);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -92,8 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions2 = new MarkerOptions();
         // افزودن عنوان
         markerOptions2.title("مقبره بداق سلطان");
-        // افزودن توضیحات
-        markerOptions2.snippet("مقبره بداق سلطان");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions2.position(maghbareye_bodagh_soltan);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -104,8 +104,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions3 = new MarkerOptions();
         // افزودن عنوان
         markerOptions3.title("استخر آبشار");
-        // افزودن توضیحات
-        markerOptions3.snippet("استخر آبشار");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions3.position(estakhre_abshar);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -116,8 +114,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions4 = new MarkerOptions();
         // افزودن عنوان
         markerOptions4.title("باغ مکائیل");
-        // افزودن توضیحات
-        markerOptions4.snippet("باغ مکائیل");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions4.position(bakhi_mikaeil);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -128,8 +124,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions5 = new MarkerOptions();
         // افزودن عنوان
         markerOptions5.title("تاناکورا");
-        // افزودن توضیحات
-        markerOptions5.snippet("تاناکورا");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions5.position(mahabad_tanakvray);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -140,8 +134,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions6 = new MarkerOptions();
         // افزودن عنوان
         markerOptions6.title("دانشگاه پیام نور");
-        // افزودن توضیحات
-        markerOptions6.snippet("دانشگاه پیام نور");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions6.position(daneshgahe_payamenoor);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
@@ -150,29 +142,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions7 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions7.title("کتابخانه عمومی شیخ شلتوت");
-        // افزودن توضیحات
-        markerOptions7.snippet("کتابخانه عمومی شیخ شلتوت");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions7.position(ketabkhane_sheykh_shaltoot);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions7.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+
+        //اینجارو تغییر دادم و قسمت عنوان دهی بالا رو حذف کردم
+        markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("کتابخانه عمومی شیخ شلتوت")));
 
 
         // in  metod ham makan ro  neshon mide
         marker = mMap.addMarker(markerOptions);
         marker.setTag(1);
+
         marker2 = mMap.addMarker(markerOptions2);
         marker2.setTag(2);
+
         marker3 = mMap.addMarker(markerOptions3);
         marker3.setTag(3);
+
         marker4 = mMap.addMarker(markerOptions4);
         marker4.setTag(4);
+
         marker5 = mMap.addMarker(markerOptions5);
         marker5.setTag(5);
+
         marker6 = mMap.addMarker(markerOptions6);
         marker6.setTag(6);
+
         marker7 = mMap.addMarker(markerOptions7);
         marker7.setTag(7);
 
@@ -187,7 +183,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         AppCompatImageView location_image;
         TextView location_about;
-
+        marker.showInfoWindow();
         //اگر مکانی وجود داشت
         if (marker != null) {
 
@@ -245,11 +241,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 location_about.setText("کانال تلگرامی کتابخانه عمومی شیخ شلتوت:" + "\n" +
                         "@shaltotlibrary" + "\n" +
                         "کتابخانه عمومی شیخ شلتوت اولین کتابخانه عمومی شهرستان مهاباد  است که مجموعه\u200Cای غنی و گسترده از منابع گوناگون در زمینه\u200Cهای مختلف علوم، فنون و ادب را در برمی\u200Cگیرد . این کتابخانه دارای 33488نسخه انواع منابع اطلاعاتی است که بیشتر آن کتاب است و از این تعداد 103 نسخه منابع دیداری شنیداری،282 نسخه منابع گویا و 2818 نسخه مربوط به نشریات است.");
+
             }
 
             //نمایش پنجره
             dialog.show();
         }
         return false;
+    }
+
+
+    //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشهعنوان مکان رو مشاهده کنیم
+    private Bitmap markerIcon(String title) {
+
+        IconGenerator generator = new IconGenerator(this);
+        generator.setBackground(getResources().getDrawable(R.drawable.tranparent));
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View view = inflater.inflate(R.layout.marker_icon, null);
+        TextView textView = (TextView) view.findViewById(R.id.title_marker);
+        textView.setText(title);
+        generator.setContentView(view);
+
+        return generator.makeIcon();
     }
 }
