@@ -70,8 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng Mahabad = new LatLng(36.7681269, 45.7210387);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Mahabad, 12.3f));
 
-        //makan ek restoran
-        LatLng speedar = new LatLng(36.7687816, 45.7217992);
+        //mokhtasate har makan
+        LatLng resturane_sepidar = new LatLng(36.7687816, 45.7217992);
         LatLng maghbareye_bodagh_soltan = new LatLng(36.748550, 45.719686);
         LatLng estakhre_abshar = new LatLng(36.756433, 45.719029);
         LatLng bakhi_mikaeil = new LatLng(36.7726177, 45.705645);
@@ -82,70 +82,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions.title("رستوران سپیدار");
         //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions.position(speedar);
+        markerOptions.position(resturane_sepidar);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("رستوران سپیدار")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions2 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions2.title("مقبره بداق سلطان");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions2.position(maghbareye_bodagh_soltan);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("مقبره ی بداق سلطان")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions3 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions3.title("استخر آبشار");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions3.position(estakhre_abshar);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions3.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions3.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("استخر آبشار")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions4 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions4.title("باغ مکائیل");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions4.position(bakhi_mikaeil);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions4.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions4.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("باغی مکائیل")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions5 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions5.title("تاناکورا");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions5.position(mahabad_tanakvray);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions5.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions5.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("تاناکورا")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions6 = new MarkerOptions();
-        // افزودن عنوان
-        markerOptions6.title("دانشگاه پیام نور");
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions6.position(daneshgahe_payamenoor);
         //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions6.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+        markerOptions6.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("دانشگاه پیام نور")));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions7 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions7.position(ketabkhane_sheykh_shaltoot);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-
         //اینجارو تغییر دادم و قسمت عنوان دهی بالا رو حذف کردم
         markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("کتابخانه عمومی شیخ شلتوت")));
 
@@ -251,7 +237,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشهعنوان مکان رو مشاهده کنیم
+    //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشه عنوان مکان رو مشاهده کنیم
     private Bitmap markerIcon(String title) {
 
         IconGenerator generator = new IconGenerator(this);

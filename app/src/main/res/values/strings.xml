@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Google Maps B</string>
-    <string name="title_activity_maps">Map View</string>
+    <string name="title_activity_maps">MapView</string>
 </resources>
