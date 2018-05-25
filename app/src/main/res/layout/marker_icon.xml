@@ -13,9 +13,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
         android:gravity="center"
-        android:text="عنوان"
         android:padding="2dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+        android:text="عنوان"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/imageView"
@@ -26,8 +28,15 @@
         app:srcCompat="@drawable/dropdown" />
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/marker_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@color/colorAccent" />
 </LinearLayout>

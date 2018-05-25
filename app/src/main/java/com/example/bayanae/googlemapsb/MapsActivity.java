@@ -84,56 +84,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions.position(resturane_sepidar);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("رستوران سپیدار")));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("رستوران سپیدار", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions2 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions2.position(maghbareye_bodagh_soltan);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("مقبره ی بداق سلطان")));
+        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("مقبره ی بداق سلطان", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions3 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions3.position(estakhre_abshar);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions3.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("استخر آبشار")));
+        markerOptions3.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("استخر آبشار", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions4 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions4.position(bakhi_mikaeil);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions4.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("باغی مکائیل")));
+        markerOptions4.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("باغی مکائیل", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions5 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions5.position(mahabad_tanakvray);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions5.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("تاناکورا")));
+        markerOptions5.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("تاناکورا", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions6 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions6.position(daneshgahe_payamenoor);
-        //ba metode zir  ek aks bray icon  an moshakhs  mikonim
-        markerOptions6.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("دانشگاه پیام نور")));
+        markerOptions6.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("دانشگاه پیام نور", R.mipmap.ic_launcher)));
 
 
         //yek class az  modir makan ha misazim
         MarkerOptions markerOptions7 = new MarkerOptions();
         //ba  metode  zir makan ro  ezafe mikonim
         markerOptions7.position(ketabkhane_sheykh_shaltoot);
-        //اینجارو تغییر دادم و قسمت عنوان دهی بالا رو حذف کردم
-        markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("کتابخانه عمومی شیخ شلتوت")));
+        markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("کتابخانه عمومی شیخ شلتوت", R.mipmap.ic_launcher)));
 
 
         // in  metod ham makan ro  neshon mide
@@ -238,16 +231,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشه عنوان مکان رو مشاهده کنیم
-    private Bitmap markerIcon(String title) {
+    private Bitmap markerIcon(String title, int id) {
 
+        //ساخت ایکون و متن سفارشی
         IconGenerator generator = new IconGenerator(this);
         generator.setBackground(getResources().getDrawable(R.drawable.tranparent));
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View view = inflater.inflate(R.layout.marker_icon, null);
+
+        //افزودن عنوان
         TextView textView = (TextView) view.findViewById(R.id.title_marker);
         textView.setText(title);
+
+        // افزودن عکس
+        AppCompatImageView marker_icon = (AppCompatImageView) view.findViewById(R.id.marker_icon);
+        marker_icon.setImageResource(id);
+
+        // دادن لایه  به عکس
         generator.setContentView(view);
 
         return generator.makeIcon();
     }
+
 }
