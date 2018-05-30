@@ -8,8 +8,10 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,14 +43,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float maxZoom = 18.9f;
     private float minZoom = 13.3f;
 
+    private ImageView gardesh,res,shop,park,cng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        gardesh=(ImageView) findViewById(R.id.menu_gardesh);
+        res=(ImageView) findViewById(R.id.menu_res);
+        shop=(ImageView) findViewById(R.id.menu_shop);
+        park=(ImageView) findViewById(R.id.menu_park);
+        cng=(ImageView) findViewById(R.id.menu_cng);
+
     }
 
 
@@ -233,8 +245,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشه عنوان مکان رو مشاهده کنیم
     private Bitmap markerIcon(String title, int id) {
 
+
         //ساخت ایکون و متن سفارشی
         IconGenerator generator = new IconGenerator(this);
+
         generator.setBackground(getResources().getDrawable(R.drawable.tranparent));
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View view = inflater.inflate(R.layout.marker_icon, null);
@@ -249,7 +263,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // دادن لایه  به عکس
         generator.setContentView(view);
-
         return generator.makeIcon();
     }
 
