@@ -1,50 +1,41 @@
 package com.example.bayanae.googlemapsb;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.ui.IconGenerator;
-
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-    private Marker marker;
-    private Marker marker2;
-    private Marker marker3;
-    private Marker marker4;
-    private Marker marker5;
-    private Marker marker6;
-    private Marker marker7;
 
     private float maxZoom = 18.9f;
     private float minZoom = 13.3f;
 
     private ImageView gardesh,res,shop,park,cng;
+    // لان عه و دکمه عی لایه ی منویه پس  استفده لیدکه ین
+    private FloatingActionButton floating_menu;
 
+    // خب  لیره لیسته که تعریف دکه ین  تا له کلی کلاس استفاده بکه ین
+    // عه ولیسته خالیه له اول دا  اما  هر وقتیک کلیک له سر هر بخشه کرا مقداری دچیته ناو
+    List<Aks>  list = new ArrayList<>();
+    //خب الان لیستکمان تعریف کردو بلام کامل نیه
+    // چون اشنا نین لگل  لیستکان بزانن هر وک ارایانه اما لیردا دتوانین به اختاری خمان نوعی لیستکمان انتخاب بکه ین
+    // ه روک دبینن لیستی مه له نوعی place که اصلا وجودی نیه و دبه بوخومان دروستی که ین
+    // ان دتوانین  له کلاسی خودی مکانه کانیش استفاده بکه ین
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +45,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //کمه  نمایش  گروه  رو  میبریم  تو متد  لود نقشهتا مجبور نشیم  با هر  کلید  دوباره نقشه لود بشه  فقط
+        //اون وقت کافیه  مکانارو تغییر بدیم
 
-        gardesh=(ImageView) findViewById(R.id.menu_gardesh);
-        res=(ImageView) findViewById(R.id.menu_res);
-        shop=(ImageView) findViewById(R.id.menu_shop);
-        park=(ImageView) findViewById(R.id.menu_park);
-        cng=(ImageView) findViewById(R.id.menu_cng);
 
     }
 
@@ -77,92 +65,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //بیشینه زووم
         mMap.setMaxZoomPreference(maxZoom);
 
-
         // Add a marker in Mahabad and move the camera
         LatLng Mahabad = new LatLng(36.7681269, 45.7210387);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Mahabad, 12.3f));
 
-        //mokhtasate har makan
-        LatLng resturane_sepidar = new LatLng(36.7687816, 45.7217992);
-        LatLng maghbareye_bodagh_soltan = new LatLng(36.748550, 45.719686);
-        LatLng estakhre_abshar = new LatLng(36.756433, 45.719029);
-        LatLng bakhi_mikaeil = new LatLng(36.7726177, 45.705645);
-        LatLng mahabad_tanakvray = new LatLng(36.781127, 45.729961);
-        LatLng daneshgahe_payamenoor = new LatLng(36.7774718, 45.7370912);
-        LatLng ketabkhane_sheykh_shaltoot = new LatLng(36.7596351, 45.7225171);
 
+        floating_menu =(FloatingActionButton) findViewById(R.id.floatingMenu);
+        floating_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions.position(resturane_sepidar);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("رستوران سپیدار", R.mipmap.ic_launcher)));
+                show_groups(mMap);
 
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions2.position(maghbareye_bodagh_soltan);
-        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("مقبره ی بداق سلطان", R.mipmap.ic_launcher)));
-
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions3 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions3.position(estakhre_abshar);
-        markerOptions3.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("استخر آبشار", R.mipmap.ic_launcher)));
-
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions4 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions4.position(bakhi_mikaeil);
-        markerOptions4.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("باغی مکائیل", R.mipmap.ic_launcher)));
-
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions5 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions5.position(mahabad_tanakvray);
-        markerOptions5.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("تاناکورا", R.mipmap.ic_launcher)));
-
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions6 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions6.position(daneshgahe_payamenoor);
-        markerOptions6.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("دانشگاه پیام نور", R.mipmap.ic_launcher)));
-
-
-        //yek class az  modir makan ha misazim
-        MarkerOptions markerOptions7 = new MarkerOptions();
-        //ba  metode  zir makan ro  ezafe mikonim
-        markerOptions7.position(ketabkhane_sheykh_shaltoot);
-        markerOptions7.icon(BitmapDescriptorFactory.fromBitmap(markerIcon("کتابخانه عمومی شیخ شلتوت", R.mipmap.ic_launcher)));
-
-
-        // in  metod ham makan ro  neshon mide
-        marker = mMap.addMarker(markerOptions);
-        marker.setTag(1);
-
-        marker2 = mMap.addMarker(markerOptions2);
-        marker2.setTag(2);
-
-        marker3 = mMap.addMarker(markerOptions3);
-        marker3.setTag(3);
-
-        marker4 = mMap.addMarker(markerOptions4);
-        marker4.setTag(4);
-
-        marker5 = mMap.addMarker(markerOptions5);
-        marker5.setTag(5);
-
-        marker6 = mMap.addMarker(markerOptions6);
-        marker6.setTag(6);
-
-        marker7 = mMap.addMarker(markerOptions7);
-        marker7.setTag(7);
-
+            }
+        });
 
         //تطبیق نقشه با متد کلیک کردن مکان ها
         mMap.setOnMarkerClickListener(this);
@@ -188,52 +104,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             location_image = (AppCompatImageView) dialog.findViewById(R.id.location_image);
             location_about = (TextView) dialog.findViewById(R.id.location_about);
 
-            //دادن عنوان
-            dialog.setTitle(marker.getTitle());
 
 
-            if (marker.getTag().equals(1)) {
-                location_image.setImageResource(R.drawable.sepidar);
-                location_about.setText("برگزاری جشن ها و مهمانیهای شما با دیزاین مورد علاقه شما \n" +
-                        "رستوران سپیدار\n" +
-                        "جهت رزرو :۸۸-۰۴۴۴۲۴۴۶۶۷۷");
 
-            } else if (marker.getTag().equals(2)) {
-                location_image.setImageResource(R.drawable.bodagh_soltan);
-                location_about.setText("بداق سلطان یا بداغ سلطان فرزند شیر خان از نوادگان صارم بیگ مکری است که به واسطه آثار ارزشمند تاریخی که از خود به جای گذاشته نام وی به درخشندگی خاصی نسبت به اسلاف و اخلاف خویش دارد. بداق سلطان در سال ۱۰۳۸ ابتدا درمیرآباد ساکن شد و سپس محل امروزی مهاباد را (که در آن زمان ساوجبلاغ نامیده می شد) به عنوان مرکز قلمرو مکری انتخاب کرد");
+            //عیره ش  که  کوتمان  بو نمایشی توضیحاتی هر مکانه کلیک کردن دادنه ین
+            // اما عه و دفعه ی کلیک کردن له ناو حلقه دادبیت
+            //چون له لیست  استفاده که ین
 
-            } else if (marker.getTag().equals(3)) {
-                location_image.setImageResource(R.drawable.abshar);
-                location_about.setText("آدرس:سه راهی بیمارستان،خیابان سرباز جنب پارک سرباز " +
-                        "تلفن:04442244005" + "\n" +
-                        "روزهای فرد ساعت9تا16:30 سانس خانم هاو ساعت18تا23:15 سانس آقایان" + "\n" +
-                        "روز های زوج ساعت 18تا 23:15 سانس آقایان");
+            for(int i = 0 ; i < list.size(); i++){
 
-            } else if (marker.getTag().equals(4)) {
-                location_image.setImageResource(R.drawable.baghi_mikaeil);
-                location_about.setText("پارک ملت یا باغ مکائیل مهاباد ، پارکی زیبا و دیدنی ست که در پایین دست سد مهاباد واقع شده، که باشکوه ترین پارک در جنوب آذربایجان غربی محسوب می شه. نور پردازی زیبا در پارک، رودخانه زیبایی که از دل این پارک می گذره با سنگ های بزرگ و جالب داخل آب و منطقه تفریحی و گردشگری که در روبروی پارک و در دل کوه ایجاد شده، همه و همه پارک ملت مهاباد رو به مکانی دیدنی تبدیل کرده");
+                //دادن عنوان
+                dialog.setTitle(list.get(i).getMarkerOptions().getTitle());
 
-            } else if (marker.getTag().equals(5)) {
-                location_image.setImageResource(R.drawable.tanakora);
-                location_about.setText(" نام سایت : سیستم فروش تاناکورای مهاباد" + "\n" +
-                        " آدرس سایت : http://tanakora-mahabad.com" + "\n" +
-                        " نوع فعالیت : لوازم خانگی ، تبلیغات و بازاریابی اینترنتی ، فروشگاههای زنجیره ای ، فروشگاه های الکترونیکی \n" +
-                        " تاریخ شروع به فعالیت: 1395");
-
-            } else if (marker.getTag().equals(6)) {
-                location_image.setImageResource(R.drawable.university_pnu);
-                location_about.setText(" تلفن: 42338211 - 42333856 - 42333852 - 42333854 - 42333600 - 42335070\n" +
-                        "دورنگار: 2338222-0444\n" +
-                        "پست الكترونيكي: mahpnu8639@yahoo.com\n" +
-                        "نشاني: مهاباد ابتدای بلوار شهید شهریکندی - دانشگاه پیام نور - صندوق پستی 438 - کدپستی : 39735-59148\n ");
-
-            } else if (marker.getTag().equals(7)) {
-                location_image.setImageResource(R.drawable.shaltotlibrary);
-                location_about.setText("کانال تلگرامی کتابخانه عمومی شیخ شلتوت:" + "\n" +
-                        "@shaltotlibrary" + "\n" +
-                        "کتابخانه عمومی شیخ شلتوت اولین کتابخانه عمومی شهرستان مهاباد  است که مجموعه\u200Cای غنی و گسترده از منابع گوناگون در زمینه\u200Cهای مختلف علوم، فنون و ادب را در برمی\u200Cگیرد . این کتابخانه دارای 33488نسخه انواع منابع اطلاعاتی است که بیشتر آن کتاب است و از این تعداد 103 نسخه منابع دیداری شنیداری،282 نسخه منابع گویا و 2818 نسخه مربوط به نشریات است.");
+                location_image.setImageResource(list.get(i).getId_pic());
+                location_about.setText(list.get(i).getInfo());
 
             }
+
 
             //نمایش پنجره
             dialog.show();
@@ -242,28 +129,113 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //ساختن یک متد برای شخصی سازی بیشتر ایکون مکان که به ما این امکان رو میده همیشه عنوان مکان رو مشاهده کنیم
-    private Bitmap markerIcon(String title, int id) {
+    //متد پنجره نمایش  گروه ها
+    private void show_groups(final GoogleMap mMap){
+
+        //ساختن یک پنجره جدید
+        final AppCompatDialog dialog = new AppCompatDialog(MapsActivity.this);
+
+        //دادن یک لایه به پنجره
+        dialog.setContentView(R.layout.menu);
+
+        dialog.setTitle("مهاباد گردی");
+
+        gardesh=(ImageView) dialog.findViewById(R.id.menu_gardesh);
+        res=(ImageView) dialog.findViewById(R.id.menu_res);
+        shop=(ImageView) dialog.findViewById(R.id.menu_shop);
+        park=(ImageView) dialog.findViewById(R.id.menu_park);
+        cng=(ImageView) dialog.findViewById(R.id.menu_cng);
 
 
-        //ساخت ایکون و متن سفارشی
-        IconGenerator generator = new IconGenerator(this);
+        //نمایش پنجره
+        dialog.show();
 
-        generator.setBackground(getResources().getDrawable(R.drawable.tranparent));
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-        View view = inflater.inflate(R.layout.marker_icon, null);
 
-        //افزودن عنوان
-        TextView textView = (TextView) view.findViewById(R.id.title_marker);
-        textView.setText(title);
+        //فقط  کافیه  له و  صفحه  دا وک  گرشی  دکمه کانی  دیکه  خاصیتی کلیک کردن  و دوایه  اول  لیست  مقدار دهی بکه ن
+        //البته  لبیرتان  بیت  بو هر دکمه ی  لیستی  خوی
+        gardesh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // افزودن عکس
-        AppCompatImageView marker_icon = (AppCompatImageView) view.findViewById(R.id.marker_icon);
-        marker_icon.setImageResource(id);
 
-        // دادن لایه  به عکس
-        generator.setContentView(view);
-        return generator.makeIcon();
+                //لیست کلاس مکان رو  توی  لیست این کلاس ریختیم
+                list = new Place(MapsActivity.this).list_gardesh();
+
+                // رفرش کردن نقشه  هنگام کلیک  کردن
+                load_marker(mMap);
+
+                //با کد زیر هم بعد  کلیک کردن روی هر گروه پنجر بسته میشه
+                dialog.cancel();
+
+
+                //دوایه اگر لیستکانی دکه تان دروست کردن
+                // عه وانه له کانتبینن دره
+
+            }
+        });
+//                dabet lera bo har dokma kilck krdan dabenen
+
+        cng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list = new Place(MapsActivity.this).list_cng();
+                load_marker(mMap);
+                dialog.cancel();
+
+            }
+        });
+
+
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list = new Place(MapsActivity.this).list_shop();
+                load_marker(mMap);
+                dialog.cancel();
+
+            }
+        });
+
+
+        res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list = new Place(MapsActivity.this).list_res();
+                load_marker(mMap);
+                dialog.cancel();
+
+            }
+        });
+
+
+        park.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list = new Place(MapsActivity.this).list_park();
+                load_marker(mMap);
+                dialog.cancel();
+
+            }
+        });
+    }
+
+
+    //متد لود کردن  دوباره  مکان
+    private void load_marker(GoogleMap mMap){
+
+        //ابتدا نقشه رو پاک میکنیم  بعد با حلقه زیر مکان های  جدید رو وارد می کنیم
+        mMap.clear();
+
+        //حالا باید اون مکان هارو نشون بدیم
+        //چون هربار با دکمه هر بخش مقدار لیست تغییر میکنه باید از حلقه ها استفاده کنیم
+        for(int i = 0 ; i < list.size(); i++){
+            mMap.addMarker(list.get(i).getMarkerOptions());
+        }
+
     }
 
 }
