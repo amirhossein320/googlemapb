@@ -5,8 +5,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 class Aks {
 
-    //عیره ش لازمه چون  دمانهه وی  یک لیستی  شخصی سازی شده اضافه بکه ین
-
     private MarkerOptions markerOptions;
     private int id_pic;
     private String info;

@@ -31,15 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView gardesh, res, shop, park, cng;
     private FloatingActionButton floating_menu;
 
-    // خب  لیره لیسته که تعریف دکه ین  تا له کلی کلاس استفاده بکه ین
-    // عه ولیسته خالیه له اول دا  اما  هر وقتیک کلیک له سر هر بخشه کرا مقداری دچیته ناو
+    // تعریف لیست
     List<Aks> list = new ArrayList<>();
-
-    //خب الان لیستکمان تعریف کردو بلام کامل نیه
-    // چون اشنا نین لگل  لیستکان بزانن هر وک ارایانه اما لیردا دتوانین به اختاری خمان نوعی لیستکمان انتخاب بکه ین
-    // ه روک دبینن لیستی مه له نوعی place که اصلا وجودی نیه و دبه بوخومان دروستی که ین
-    // ان دتوانین  له کلاسی خودی مکانه کانیش استفاده بکه ین
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             location_about = (TextView) dialog.findViewById(R.id.location_about);
 
 
-            //عیره ش  که  کوتمان  بو نمایشی توضیحاتی هر مکانه کلیک کردن دادنه ین
-            // اما عه و دفعه ی کلیک کردن له ناو حلقه دادبیت
-            //چون له لیست  استفاده که ین
-
+            // کلیک کردن داخل حلقه قرار می گیرد چون از لیست استفاده کرده ایم
             Toast.makeText(this, marker.getTitle(), Toast.LENGTH_SHORT).show();
             for (int i = 0; i < list.size(); i++) {
 
@@ -137,7 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onResume() {
         super.onResume();
 
-        //اید برنامه بسته نشه اما دوباره اجرا بشه برای همین اونو تو قسمت ادامه دادن برنامه هم نوشتیم
+        //باید برنامه بسته نشه اما دوباره اجرا بشه برای همین اونو تو قسمت ادامه دادن برنامه هم نوشتیم
         setLocaleToApp();
 
     }
@@ -163,13 +153,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //نمایش پنجره
         dialog.show();
 
-
-        //فقط  کافیه  له و  صفحه  دا وک  گرشی  دکمه کانی  دیکه  خاصیتی کلیک کردن  و دوایه  اول  لیست  مقدار دهی بکه ن
-        //البته  لبیرتان  بیت  بو هر دکمه ی  لیستی  خوی
+        // برای هر دکمه خاصیت کلیک کردن می گذاریم
         gardesh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 //لیست کلاس مکان رو  توی  لیست این کلاس ریختیم
                 list = new Place(MapsActivity.this).list_gardesh();
@@ -177,16 +164,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // رفرش کردن نقشه  هنگام کلیک  کردن
                 load_marker(mMap);
 
-                //با کد زیر هم بعد  کلیک کردن روی هر گروه پنجر بسته میشه
+                //با کد زیر هم بعد  کلیک کردن روی هر گروه پنجره بسته میشه
                 dialog.cancel();
-
-
-                //دوایه اگر لیستکانی دکه تان دروست کردن
-                // عه وانه له کانتبینن دره
 
             }
         });
-//                dabet lera bo har dokma kilck krdan dabenen
 
         cng.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +180,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-
 
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
