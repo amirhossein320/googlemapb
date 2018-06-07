@@ -10,9 +10,12 @@ class Aks {
     private MarkerOptions markerOptions;
     private int id_pic;
     private String info;
+    private String title;
 
-    public Aks(MarkerOptions markerOptions, int id_pic, String info) {
+
+    public Aks(MarkerOptions markerOptions, String title, int id_pic, String info) {
         this.markerOptions = markerOptions;
+        this.title = title;
         this.id_pic = id_pic;
         this.info = info;
     }
@@ -24,6 +27,14 @@ class Aks {
 
     public void setMarkerOptions(MarkerOptions markerOptions) {
         this.markerOptions = markerOptions;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId_pic() {
