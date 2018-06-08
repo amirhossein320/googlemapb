@@ -102,7 +102,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             // کلیک کردن داخل حلقه قرار می گیرد چون از لیست استفاده کرده ایم
-            Toast.makeText(this, marker.getTitle(), Toast.LENGTH_SHORT).show();
             for (int i = 0; i < list.size(); i++) {
 
                 if(marker.getTag() == (Object) i) {
